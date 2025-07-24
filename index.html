@@ -973,40 +973,33 @@
                 loading.style.display = 'block';
                 
                 try {
-                    // Simular consulta à API (substitua pela chamada real à API)
-                    const token = "178657835CNhaALFuDq322561304"; // Substitua pelo seu token real
-                    const url = `https://ws.hubdodesenvolvedor.com.br/v2/cpf/?cpf=${cpf}&token=${token}`;
-                    
-                    // Chamada real à API (descomente quando tiver o token)
-                    // const response = await fetch(url);
-                    // const data = await response.json();
-                    
-                    // Simulação de resposta da API (remova quando usar a API real)
+                    // Simulação de resposta da API - REMOVA ESTA PARTE QUANDO USAR API REAL
                     const data = {
                         return: "OK",
                         result: {
-                            nome_da_pf: "João da Silva",
-                            data_nascimento: "15/03/1985",
+                            nome_da_pf: "CARLOS ALBERTO DA SILVA", // NOME COMPLETO AQUI
+                            data_nascimento: "15/05/1980",
                             situacao_cadastral: "Regular"
                         }
                     };
                     
                     if (data.return !== "OK") {
-                        throw new Error(data.message || 'Erro na consulta do CPF');
+                        throw new Error('CPF não encontrado');
                     }
                     
-                    // Preencher resultados
-                    document.getElementById('resultNome').textContent = data.result.nome_da_pf || 'Não encontrado';
+                    // Preencher resultados - O NOME SERÁ EXIBIDO AQUI
+                    document.getElementById('resultNome').textContent = data.result.nome_da_pf;
                     document.getElementById('resultCpf').textContent = formatarCPF(cpf);
-                    document.getElementById('resultNascimento').textContent = data.result.data_nascimento || 'Não encontrado';
-                    document.getElementById('resultSituacao').textContent = data.result.situacao_cadastral || 'Não encontrado';
+                    document.getElementById('resultNascimento').textContent = data.result.data_nascimento;
+                    document.getElementById('resultSituacao').textContent = data.result.situacao_cadastral;
                     
                     // Esconder formulário e mostrar resultados
                     cpfForm.style.display = 'none';
                     result.style.display = 'block';
                     
                 } catch (error) {
-                    console.error('Erro na consulta:', error);
+                    console.error("Erro:", error);
+                    document.getElementById('resultNome').textContent = "Erro na consulta";
                     alert('Ocorreu um erro ao verificar seu CPF. Por favor, tente novamente.');
                 } finally {
                     // Esconder loading
