@@ -3,368 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon - Verifique sua Elegibilidade</title>
+    <title>Meu Site Moderno</title>
     <style>
-        /* Estilos Amazon */
-        body {
-            font-family: "Amazon Ember", Arial, sans-serif;
-            background-color: #f3f3f3;
+        /* Reset e Estilos Globais */
+        * {
             margin: 0;
             padding: 0;
-            color: #111;
+            box-sizing: border-box;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
         }
         
-        .amazon-box {
-            background: white;
-            border-radius: 4px;
-            padding: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,.1);
-            border: 1px solid #ddd;
+        /* Estilos do Header */
+        header {
+            background-color: #242c3c;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
         }
         
-        .amazon-title {
-            color: #111;
-            font-weight: 400;
-            font-size: 28px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
+        /* Logo */
+        .logo-container img {
+            height: 50px;
+            transition: transform 0.3s ease;
         }
         
-        .amazon-subtitle {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 15px;
+        .logo-container img:hover {
+            transform: scale(1.05);
         }
         
-        .form-control {
-            width: 100%;
-            height: 31px;
-            padding: 3px 7px;
-            border: 1px solid #a6a6a6;
-            border-radius: 3px;
-            box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
-            margin-bottom: 15px;
-            font-family: inherit;
+        /* Menu Central */
+        header nav {
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
-        .form-control:focus {
-            outline: none;
-            border-color: #e77600;
-            box-shadow: 0 0 3px 2px rgba(228,121,17,.5);
-        }
-        
-        .btn {
-            background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
-            border-radius: 3px;
-            border: 1px solid;
-            border-color: #a88734 #9c7e31 #846a29;
-            color: #111;
-            cursor: pointer;
-            display: inline-block;
-            font-family: inherit;
-            font-size: 13px;
-            line-height: 19px;
-            padding: 7px 15px;
-            text-align: center;
+        header nav a {
+            color: white;
             text-decoration: none;
-            vertical-align: middle;
-            width: auto;
-        }
-        
-        .btn:hover {
-            background: linear-gradient(to bottom,#f5d78e,#eeb933);
-        }
-        
-        .btn:active {
-            border-color: #a88734 #9c7e31 #9c7e31;
-            box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
-        }
-        
-        .error {
-            border-color: #c40000 !important;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: #f0c14b;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f7f7f7;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
             border-radius: 4px;
-            border: 1px solid #ddd;
-            display: none;
         }
         
-        .result-title {
-            font-weight: bold;
-            color: #0066c0;
-            margin-bottom: 10px;
+        header nav a:hover {
+            color: #242c3c;
+            background-color: white;
         }
         
-        .result-item {
-            margin-bottom: 8px;
+        /* Botão Ajuda */
+        .help-container a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .help-container a:hover {
+            color: #242c3c;
+            background-color: white;
+            transform: scale(1.05);
+            border-color: white;
+        }
+        
+        .help-container svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .help-container a:hover svg {
+            transform: rotate(10deg);
+        }
+        
+        /* Conteúdo Principal */
+        main {
+            padding: 40px 20px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        h1 {
+            color: #242c3c;
+            margin-bottom: 20px;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #242c3c;
+            color: white;
+            text-align: center;
+            padding: 15px;
             font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="amazon-box">
-            <h1 class="amazon-title">Saiba se você está apto a Receber</h1>
-            <p class="amazon-subtitle">Verifique sua elegibilidade para receber produtos da Amazon</p>
-            
-            <form id="form-verificacao">
-                <div>
-                    <label for="cpf">Digite o CPF do comprador:</label>
-                    <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00" maxlength="14" required id="cpf">
-                </div>
-                
-                <div>
-                    <label for="cep">Informe o seu CEP:</label>
-                    <input type="text" name="cep" class="form-control" id="cep" placeholder="00000-000" maxlength="9" required>
-                </div>
-                
-                <div id="botao-container">
-                    <button type="submit" class="btn" id="consultar-btn">Verificar Elegibilidade</button>
-                </div>
-                
-                <div id="loading-container" style="display: none; text-align: center; margin-top: 20px;">
-                    <p style="font-size: 16px; color: #333;">Verificando seus dados...</p>
-                    <div class="spinner"></div>
-                </div>
-            </form>
-            
-            <div id="resultado-container" class="result-box">
-                <div class="result-title">Resultado da Verificação</div>
-                <div id="res-nome" class="result-item"></div>
-                <div id="res-cpf" class="result-item"></div>
-                <div id="res-endereco" class="result-item"></div>
-                <div id="res-status" class="result-item"></div>
-                <div id="res-prazo" class="result-item"></div>
-            </div>
+    <header>
+        <!-- Logo no canto esquerdo -->
+        <div class="logo-container">
+            <a href="#">
+                <img src="logo.png" alt="Logo do Site">
+            </a>
         </div>
-    </div>
-
-    <script>
-        // Função para validar CPF
-        function validarCPF(cpf) {
-            cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
-            
-            // Verifica se tem 11 dígitos e não é uma sequência repetida
-            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-                return false;
-            }
-            
-            // Validação do primeiro dígito verificador
-            let soma = 0;
-            for (let i = 0; i < 9; i++) {
-                soma += parseInt(cpf.charAt(i)) * (10 - i);
-            }
-            let resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            if (resto !== parseInt(cpf.charAt(9))) {
-                return false;
-            }
-            
-            // Validação do segundo dígito verificador
-            soma = 0;
-            for (let i = 0; i < 10; i++) {
-                soma += parseInt(cpf.charAt(i)) * (11 - i);
-            }
-            resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            if (resto !== parseInt(cpf.charAt(10))) {
-                return false;
-            }
-            
-            return true;
-        }
-
-        function formatarCPF(cpf) {
-            return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-        }
-
-        function formatarCEP(cep) {
-            return cep.replace(/(\d{5})(\d{3})/, "$1-$2");
-        }
-
-        function atualizarContagemRegressiva() {
-            const agora = new Date();
-            const fimDoDia = new Date(
-                agora.getFullYear(),
-                agora.getMonth(),
-                agora.getDate(),
-                23,
-                59,
-                59
-            );
-
-            const diffMs = fimDoDia - agora;
-            if (diffMs <= 0) {
-                document.getElementById("res-prazo").textContent = "Prazo expirado";
-                clearInterval(intervalContagem);
-                return;
-            }
-
-            const horas = Math.floor(diffMs / (1000 * 60 * 60));
-            const minutos = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diffMs % (1000 * 60)) / 1000);
-
-            const dd = agora.getDate().toString().padStart(2, "0");
-            const mm = (agora.getMonth() + 1).toString().padStart(2, "0");
-            const yyyy = agora.getFullYear();
-
-            document.getElementById("res-prazo").textContent = `${dd}/${mm}/${yyyy} às 23:59 (Tempo restante: ${horas}h ${minutos}m ${segundos}s)`;
-        }
-
-        // Função para consultar CEP na API ViaCEP
-        async function consultarCEP(cep) {
-            try {
-                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = await response.json();
-                
-                if (data.erro) {
-                    throw new Error('CEP não encontrado');
-                }
-                
-                return {
-                    rua: data.logradouro || 'Não informado',
-                    bairro: data.bairro || 'Não informado',
-                    cidade: data.localidade,
-                    estado: data.uf
-                };
-            } catch (error) {
-                console.error('Erro ao consultar CEP:', error);
-                return {
-                    rua: 'Não encontrado',
-                    bairro: 'Não encontrado',
-                    cidade: 'Não encontrado',
-                    estado: 'Não encontrado'
-                };
-            }
-        }
-
-        let intervalContagem;
-
-        document.getElementById("form-verificacao").addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            const cpfInput = document.getElementById("cpf");
-            const cepInput = document.getElementById("cep");
-
-            const cpfRaw = cpfInput.value.replace(/\D/g, "");
-            const cepRaw = cepInput.value.replace(/\D/g, "");
-
-            // Validação básica do CPF
-            if (cpfRaw.length !== 11) {
-                cpfInput.focus();
-                cpfInput.classList.add('error');
-                alert("CPF inválido. Digite 11 números.");
-                return;
-            } else {
-                cpfInput.classList.remove('error');
-            }
-
-            // Validação básica do CEP
-            if (!cepRaw || cepRaw.length !== 8) {
-                cepInput.focus();
-                cepInput.classList.add('error');
-                alert("Por favor, insira um CEP válido com 8 dígitos.");
-                return;
-            } else {
-                cepInput.classList.remove('error');
-            }
-
-            // Mostra o loading
-            document.getElementById("botao-container").style.display = "none";
-            document.getElementById("loading-container").style.display = "block";
-            document.getElementById("resultado-container").style.display = "none";
-
-            try {
-                // Simulação de consulta à API (substitua por sua lógica real)
-                const [cpfInfo, cepInfo] = await Promise.all([
-                    new Promise(resolve => {
-                        // Simulação de resposta da API
-                        setTimeout(() => {
-                            resolve({
-                                nome: "Cliente Amazon",
-                                cpf: cpfRaw,
-                                status: "Apto a receber",
-                                mensagem: "Parabéns! Você está apto a receber produtos da Amazon."
-                            });
-                        }, 2000);
-                    }),
-                    consultarCEP(cepRaw)
-                ]);
-
-                // Exibe os resultados
-                document.getElementById("res-nome").textContent = `Nome: ${cpfInfo.nome}`;
-                document.getElementById("res-cpf").textContent = `CPF: ${formatarCPF(cpfInfo.cpf)}`;
-                document.getElementById("res-endereco").textContent = `Endereço: ${cepInfo.rua}, ${cepInfo.bairro}, ${cepInfo.cidade}-${cepInfo.estado}`;
-                document.getElementById("res-status").textContent = `Status: ${cpfInfo.status}`;
-                
-                // Inicia a contagem regressiva
-                atualizarContagemRegressiva();
-                clearInterval(intervalContagem);
-                intervalContagem = setInterval(atualizarContagemRegressiva, 1000);
-                
-                // Mostra o resultado
-                document.getElementById("resultado-container").style.display = "block";
-                
-            } catch (error) {
-                alert("Ocorreu um erro ao verificar seus dados: " + error.message);
-            } finally {
-                document.getElementById("botao-container").style.display = "block";
-                document.getElementById("loading-container").style.display = "none";
-            }
-        });
-
-        // Máscaras para CPF e CEP
-        document.getElementById("cpf").addEventListener("input", function(e) {
-            let value = e.target.value.replace(/\D/g, "");
-            
-            if (value.length > 3) {
-                value = value.replace(/^(\d{3})/, "$1.");
-            }
-            if (value.length > 7) {
-                value = value.replace(/^(\d{3})\.(\d{3})/, "$1.$2.");
-            }
-            if (value.length > 11) {
-                value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, "$1.$2.$3-");
-            }
-            
-            e.target.value = value.substring(0, 14);
-        });
-
-        document.getElementById("cep").addEventListener("input", function(e) {
-            let value = e.target.value.replace(/\D/g, "");
-            
-            if (value.length > 5) {
-                value = value.replace(/^(\d{5})/, "$1-");
-            }
-            
-            e.target.value = value.substring(0, 9);
-        });
-    </script>
+        
+        <!-- Menu de navegação centralizado -->
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Sobre</a>
+            <a href="#">Serviços</a>
+            <a href="#">Contato</a>
+        </nav>
+        
+        <!-- Opção Ajuda no canto direito -->
+        <div class="help-container">
+            <a href="#">
+                <span>Ajuda</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12" y2="17"></line>
+                </svg>
+            </a>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Bem-vindo ao Meu Site</h1>
+        <p>Este é um exemplo de site com header moderno contendo logo, menu centralizado e botão de ajuda.</p>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Meu Site Moderno. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
