@@ -23,6 +23,8 @@
             --border-radius: 4px;
             --box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             --transition: all 0.3s ease;
+            --error-color: #dc3545;
+            --success-color: #28a745;
         }
         
         * {
@@ -238,23 +240,64 @@
             visibility: visible;
         }
         
-        /* Conteúdo Principal */
-        .hero {
+        /* Formulário de CPF */
+        .cpf-section {
             text-align: center;
-            padding: 5rem 0;
+            padding: 3rem 0;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: var(--white);
         }
         
-        .hero h1 {
+        .cpf-section h1 {
             color: var(--white);
             margin-bottom: 1.5rem;
         }
         
-        .hero p {
+        .cpf-section p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 2rem;
+        }
+        
+        .cpf-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--white);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .btn {
@@ -268,6 +311,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
+            width: 100%;
         }
         
         .btn:hover,
@@ -276,6 +320,76 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             outline: none;
+        }
+        
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .form-control.error {
+            border-color: var(--error-color);
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .result-container {
+            display: none;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            text-align: left;
+            color: var(--text-color);
+        }
+        
+        .result-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: var(--primary-color);
         }
         
         /* Seção de Recursos */
@@ -491,12 +605,16 @@
                 display: block;
             }
             
-            .hero {
-                padding: 3rem 0;
+            .cpf-section {
+                padding: 2rem 0;
             }
             
-            .hero h1 {
+            .cpf-section h1 {
                 font-size: 2rem;
+            }
+            
+            .cpf-form {
+                padding: 1.5rem;
             }
             
             .section {
@@ -517,6 +635,10 @@
             .mobile-menu-nav a {
                 padding: 10px 15px;
                 font-size: 0.9rem;
+            }
+            
+            .cpf-form {
+                padding: 1rem;
             }
         }
     </style>
@@ -583,12 +705,47 @@
     <div class="overlay" id="overlay"></div>
     
     <main>
-        <!-- Seção Hero -->
-        <section class="hero">
+        <!-- Seção de Validação de CPF -->
+        <section class="cpf-section">
             <div class="container">
-                <h1>Bem-vindo ao Nosso Site Profissional</h1>
-                <p>Oferecemos soluções inovadoras e vales-compras exclusivos para você aproveitar ao máximo suas compras online.</p>
-                <button class="btn">Saiba Mais</button>
+                <h1>Valide seu CPF para continuar</h1>
+                <p>Preencha seus dados abaixo para verificar sua elegibilidade para nossas ofertas exclusivas</p>
+                
+                <form id="cpfForm" class="cpf-form">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" class="form-control" placeholder="Digite seu nome completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" class="form-control" placeholder="000.000.000-00" required>
+                        <div id="cpfError" class="error-message">Por favor, insira um CPF válido</div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="btn">Verificar Elegibilidade</button>
+                    
+                    <div id="loading" class="loading">
+                        <div class="spinner"></div>
+                        <p>Verificando seus dados...</p>
+                    </div>
+                </form>
+                
+                <div id="result" class="result-container">
+                    <h3>Resultado da Verificação</h3>
+                    <div class="result-item">
+                        <span class="result-label">Nome:</span> <span id="resultNome"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">CPF:</span> <span id="resultCpf"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Data de Nascimento:</span> <span id="resultNascimento"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Situação Cadastral:</span> <span id="resultSituacao"></span>
+                    </div>
+                </div>
             </div>
         </section>
             
@@ -734,6 +891,141 @@
                         });
                     }
                 });
+            });
+            
+            // Máscara para CPF
+            const cpfInput = document.getElementById('cpf');
+            cpfInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 3) {
+                    value = value.replace(/^(\d{3})/, '$1.');
+                }
+                if (value.length > 7) {
+                    value = value.replace(/^(\d{3})\.(\d{3})/, '$1.$2.');
+                }
+                if (value.length > 11) {
+                    value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
+                }
+                
+                e.target.value = value.substring(0, 14);
+            });
+            
+            // Validação de CPF
+            function validarCPF(cpf) {
+                cpf = cpf.replace(/\D/g, '');
+                
+                if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+                    return false;
+                }
+                
+                // Validação do primeiro dígito verificador
+                let soma = 0;
+                for (let i = 0; i < 9; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (10 - i);
+                }
+                let resto = (soma * 10) % 11;
+                if (resto === 10 || resto === 11) resto = 0;
+                if (resto !== parseInt(cpf.charAt(9))) {
+                    return false;
+                }
+                
+                // Validação do segundo dígito verificador
+                soma = 0;
+                for (let i = 0; i < 10; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (11 - i);
+                }
+                resto = (soma * 10) % 11;
+                if (resto === 10 || resto === 11) resto = 0;
+                if (resto !== parseInt(cpf.charAt(10))) {
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            // Formatar CPF para exibição
+            function formatarCPF(cpf) {
+                return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            }
+            
+            // Formulário de CPF
+            const cpfForm = document.getElementById('cpfForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            
+            cpfForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const nome = document.getElementById('nome').value.trim();
+                const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+                const cpfError = document.getElementById('cpfError');
+                
+                // Validação básica
+                if (!nome) {
+                    alert('Por favor, insira seu nome completo');
+                    return;
+                }
+                
+                if (!validarCPF(cpf)) {
+                    cpfInput.classList.add('error');
+                    cpfError.style.display = 'block';
+                    return;
+                }
+                
+                cpfInput.classList.remove('error');
+                cpfError.style.display = 'none';
+                
+                // Mostrar loading
+                submitBtn.disabled = true;
+                loading.style.display = 'block';
+                
+                try {
+                    // Simular consulta à API (substitua pela chamada real à API)
+                    const token = "178657835CNhaALFuDq322561304"; // Substitua pelo seu token real
+                    const url = `https://ws.hubdodesenvolvedor.com.br/v2/cpf/?cpf=${cpf}&token=${token}`;
+                    
+                    // Chamada real à API (descomente quando tiver o token)
+                    // const response = await fetch(url);
+                    // const data = await response.json();
+                    
+                    // Simulação de resposta da API (remova quando usar a API real)
+                    const data = {
+                        return: "OK",
+                        result: {
+                            nome_da_pf: nome,
+                            data_nascimento: "15/03/1985",
+                            situacao_cadastral: "Regular"
+                        }
+                    };
+                    
+                    if (data.return !== "OK") {
+                        throw new Error(data.message || 'Erro na consulta do CPF');
+                    }
+                    
+                    // Preencher resultados
+                    document.getElementById('resultNome').textContent = data.result.nome_da_pf || 'Não encontrado';
+                    document.getElementById('resultCpf').textContent = formatarCPF(cpf);
+                    document.getElementById('resultNascimento').textContent = data.result.data_nascimento || 'Não encontrado';
+                    document.getElementById('resultSituacao').textContent = data.result.situacao_cadastral || 'Não encontrado';
+                    
+                    // Mostrar resultados
+                    result.style.display = 'block';
+                    
+                    // Scroll para resultados
+                    setTimeout(() => {
+                        result.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                    
+                } catch (error) {
+                    console.error('Erro na consulta:', error);
+                    alert('Ocorreu um erro ao verificar seu CPF. Por favor, tente novamente.');
+                } finally {
+                    // Esconder loading
+                    submitBtn.disabled = false;
+                    loading.style.display = 'none';
+                }
             });
         });
     </script>
