@@ -500,13 +500,14 @@
             });
             
             // Confirmar participação
-            confirmBtn.addEventListener('click', function() {
+             confirmBtn.addEventListener('click', function() {
                 if (!selectedPaymentMethod) {
                     alert('Por favor, selecione um método de pagamento.');
                     return;
                 }
                 
-                // Aqui você pode adicionar a lógica para processar o pagamento
+                // Redirect to the specified link
+                window.location.href = "https://go.disruptybr.shop/3unutjdqew";
                 // Por exemplo, redirecionar para a página de pagamento ou enviar os dados
                 
                 alert('Pagamento confirmado! Em breve você receberá o link do seu vale por e-mail e WhatsApp.');
