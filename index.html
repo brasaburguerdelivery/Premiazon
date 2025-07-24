@@ -141,6 +141,10 @@
             transition: var(--transition);
         }
         
+        .help-btn span {
+            color: #000; /* Cor preta para o texto "Ajuda" */
+        }
+        
         .help-btn:hover,
         .help-btn:focus {
             color: var(--primary-color);
@@ -342,6 +346,7 @@
         
         .footer-logo {
             margin-bottom: 1.5rem;
+            text-align: center;
         }
         
         .footer-logo img {
@@ -358,6 +363,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            justify-content: center;
         }
         
         .social-links a {
@@ -374,6 +380,18 @@
         .social-links a:hover {
             background-color: var(--accent-color);
             transform: translateY(-3px);
+        }
+        
+        .footer-info {
+            text-align: center;
+            margin-top: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-info p {
+            margin-bottom: 0.5rem;
         }
         
         /* Responsividade */
@@ -555,9 +573,9 @@
             </div>
             
             <div class="footer-info">
-            Amazon Serviços de Varejo do Brasil Ltda. | CNPJ 15.436.940/0001-03<br>
-            Av. Juscelino Kubitschek, 2041, Torre E, 18° andar - São Paulo CEP: 04543-011<br>
-            Fale conosco | ajuda-amazon@amazon.com.br
+                <p>Amazon Serviços de Varejo do Brasil Ltda. | CNPJ 15.436.940/0001-03</p>
+                <p>Av. Juscelino Kubitschek, 2041, Torre E, 18° andar - São Paulo CEP: 04543-011</p>
+                <p>Fale conosco | ajuda-amazon@amazon.com.br</p>
             </div>
         </div>
     </footer>
