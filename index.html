@@ -105,8 +105,37 @@
             background-color: #141c24;
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 30px 15px;
             font-size: 14px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-info {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-copyright {
+            margin-top: 20px;
+            color: #aaa;
         }
     </style>
 </head>
@@ -146,7 +175,23 @@
     </main>
     
     <footer>
-        <p>&copy; 2023 Meu Site Moderno. Todos os direitos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Condições de Uso</a>
+            <a href="#">Notificação de Privacidade</a>
+            <a href="#">Cookies</a>
+            <a href="#">Anúncios Baseados em Interesses</a>
+        </div>
+        
+        <div class="footer-copyright">
+            © 2021-2025 Amazon.com, Inc. ou suas afiliadas
+        </div>
+        
+        <div class="footer-info">
+            Amazon Serviços de Varejo do Brasil Ltda. | CNPJ 15.436.940/0001-03<br>
+            Av. Juscelino Kubitschek, 2041, Torre E, 18° andar - São Paulo CEP: 04543-011<br>
+            Fale conosco | ajuda-amazon@amazon.com.br
+        </div>
+        
     </footer>
 </body>
 </html>
