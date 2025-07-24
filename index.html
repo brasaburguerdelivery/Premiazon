@@ -372,9 +372,10 @@
             background-color: var(--white);
             padding: 2rem;
             border-radius: var(--border-radius);
-            margin-top: 2rem;
+            margin: 0 auto;
             text-align: left;
             color: var(--text-color);
+            max-width: 500px;
         }
         
         .result-item {
@@ -709,14 +710,9 @@
         <section class="cpf-section">
             <div class="container">
                 <h1>Valide seu CPF para continuar</h1>
-                <p>Preencha seus dados abaixo para verificar sua elegibilidade para nossas ofertas exclusivas</p>
+                <p>Preencha seu CPF abaixo para verificar sua elegibilidade para nossas ofertas exclusivas</p>
                 
                 <form id="cpfForm" class="cpf-form">
-                    <div class="form-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" id="nome" class="form-control" placeholder="Digite seu nome completo" required>
-                    </div>
-                    
                     <div class="form-group">
                         <label for="cpf">CPF</label>
                         <input type="text" id="cpf" class="form-control" placeholder="000.000.000-00" required>
@@ -745,6 +741,7 @@
                     <div class="result-item">
                         <span class="result-label">Situação Cadastral:</span> <span id="resultSituacao"></span>
                     </div>
+                    <button id="backBtn" class="btn" style="margin-top: 20px;">Voltar</button>
                 </div>
             </div>
         </section>
@@ -774,7 +771,7 @@
             <ul>
                 <li>Ter 18 anos ou mais</li>
                 <li>Residir no Brasil</li>
-                <li>Preencher corretamente o formulário com nome, e-mail e CPF válido (apenas para validação e segurança)</li>
+                <li>Preencher corretamente o formulário com CPF válido (apenas para validação e segurança)</li>
             </ul>
             
             <h3>Por que estamos fazendo isso?</h3>
@@ -954,19 +951,13 @@
             const submitBtn = document.getElementById('submitBtn');
             const loading = document.getElementById('loading');
             const result = document.getElementById('result');
+            const backBtn = document.getElementById('backBtn');
             
             cpfForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                const nome = document.getElementById('nome').value.trim();
                 const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
                 const cpfError = document.getElementById('cpfError');
-                
-                // Validação básica
-                if (!nome) {
-                    alert('Por favor, insira seu nome completo');
-                    return;
-                }
                 
                 if (!validarCPF(cpf)) {
                     cpfInput.classList.add('error');
@@ -994,7 +985,7 @@
                     const data = {
                         return: "OK",
                         result: {
-                            nome_da_pf: nome,
+                            nome_da_pf: "João da Silva",
                             data_nascimento: "15/03/1985",
                             situacao_cadastral: "Regular"
                         }
@@ -1010,13 +1001,9 @@
                     document.getElementById('resultNascimento').textContent = data.result.data_nascimento || 'Não encontrado';
                     document.getElementById('resultSituacao').textContent = data.result.situacao_cadastral || 'Não encontrado';
                     
-                    // Mostrar resultados
+                    // Esconder formulário e mostrar resultados
+                    cpfForm.style.display = 'none';
                     result.style.display = 'block';
-                    
-                    // Scroll para resultados
-                    setTimeout(() => {
-                        result.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
                     
                 } catch (error) {
                     console.error('Erro na consulta:', error);
@@ -1026,6 +1013,13 @@
                     submitBtn.disabled = false;
                     loading.style.display = 'none';
                 }
+            });
+            
+            // Botão Voltar
+            backBtn.addEventListener('click', function() {
+                result.style.display = 'none';
+                cpfForm.style.display = 'block';
+                document.getElementById('cpf').value = '';
             });
         });
     </script>
