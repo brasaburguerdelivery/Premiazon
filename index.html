@@ -36,6 +36,8 @@
             background-color: var(--light-gray);
             color: var(--text-color);
             line-height: 1.6;
+            position: relative;
+            transition: transform 0.3s ease;
         }
         
         /* Tipografia */
@@ -139,6 +141,8 @@
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.3);
             transition: var(--transition);
+            background: none;
+            cursor: pointer;
         }
         
         .help-btn span {
@@ -161,6 +165,77 @@
         
         .help-btn:hover svg {
             transform: rotate(10deg);
+        }
+        
+        /* Menu Mobile */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 101;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--primary-color);
+            z-index: 100;
+            transition: right 0.3s ease;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .mobile-menu-nav a {
+            color: var(--white);
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu-help-btn {
+            margin-top: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* Conteúdo Principal */
@@ -400,13 +475,20 @@
         /* Responsividade */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 1rem;
             }
             
             .main-nav {
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none;
+            }
+            
+            .help-btn.desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .hero {
@@ -428,17 +510,12 @@
         }
         
         @media (max-width: 480px) {
-            .main-nav {
-                gap: 0.5rem;
+            .mobile-menu {
+                width: 250px;
             }
             
-            .main-nav a {
-                padding: 6px 10px;
-                font-size: 0.9rem;
-            }
-            
-            .help-btn {
-                padding: 6px 12px;
+            .mobile-menu-nav a {
+                padding: 10px 15px;
                 font-size: 0.9rem;
             }
         }
@@ -454,7 +531,7 @@
                 </a>
             </div>
             
-            <!-- Menu de navegação -->
+            <!-- Menu de navegação desktop -->
             <nav class="main-nav">
                 <a href="#">Home</a>
                 <a href="#">Sobre</a>
@@ -462,8 +539,8 @@
                 <a href="#">Contato</a>
             </nav>
             
-            <!-- Botão Ajuda -->
-            <button class="help-btn" id="helpBtn">
+            <!-- Botão Ajuda desktop -->
+            <button class="help-btn desktop" id="helpBtn">
                 <span>Ajuda</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -471,8 +548,39 @@
                     <line x1="12" y1="17" x2="12" y2="17"></line>
                 </svg>
             </button>
+            
+            <!-- Botão Menu Mobile -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
         </div>
     </header>
+    
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu-nav">
+            <a href="#">Home</a>
+            <a href="#">Sobre</a>
+            <a href="#">Serviços</a>
+            <a href="#">Contato</a>
+        </nav>
+        
+        <button class="help-btn mobile-menu-help-btn" id="mobileHelpBtn">
+            <span>Ajuda</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12" y2="17"></line>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Overlay para menu mobile -->
+    <div class="overlay" id="overlay"></div>
     
     <main>
         <!-- Seção Hero -->
@@ -547,17 +655,26 @@
     </footer>
 
     <script>
-        // Script para o modal de ajuda
+        // Script para o modal de ajuda e menu mobile
         document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do modal
             const modal = document.getElementById("helpModal");
-            const btn = document.getElementById("helpBtn");
+            const helpBtns = document.querySelectorAll("#helpBtn, #mobileHelpBtn");
             const span = document.getElementsByClassName("close-btn")[0];
             
+            // Elementos do menu mobile
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const mobileMenu = document.getElementById("mobileMenu");
+            const overlay = document.getElementById("overlay");
+            
             // Abrir modal
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
-                document.body.style.overflow = 'hidden';
+            helpBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = "block";
+                    document.body.style.overflow = 'hidden';
+                    closeMobileMenu(); // Fechar menu mobile se estiver aberto
+                });
             });
             
             // Fechar modal com botão
@@ -582,6 +699,25 @@
                 }
             });
             
+            // Abrir/fechar menu mobile
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Fechar menu mobile ao clicar no overlay
+            overlay.addEventListener('click', function() {
+                closeMobileMenu();
+            });
+            
+            // Função para fechar menu mobile
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
             // Suavizar scroll para links âncora
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -592,6 +728,7 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        closeMobileMenu(); // Fechar menu mobile antes de rolar
                         targetElement.scrollIntoView({
                             behavior: 'smooth'
                         });
