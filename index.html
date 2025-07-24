@@ -109,6 +109,20 @@
             font-size: 14px;
         }
         
+        .footer-logo {
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-logo img:hover {
+            opacity: 1;
+        }
+        
         .footer-links {
             display: flex;
             justify-content: center;
@@ -175,6 +189,12 @@
     </main>
     
     <footer>
+        <div class="footer-logo">
+            <a href="#">
+                <img src="images/logo.png" alt="Logo do Site">
+            </a>
+        </div>
+        
         <div class="footer-links">
             <a href="#">Condições de Uso</a>
             <a href="#">Notificação de Privacidade</a>
