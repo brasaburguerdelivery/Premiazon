@@ -1208,3 +1208,213 @@ footer::before {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
 }
+
+/* Estilos para a tela de confirmação de oferta - Integrado com o design existente */
+.offer-confirmation {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    z-index: 10;
+}
+
+.offer-confirmation.show {
+    display: block;
+}
+
+.offer-confirmation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--gradient-primary);
+}
+
+.offer-confirmation h2 {
+    color: var(--success-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+}
+
+.offer-confirmation p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.offer-confirmation .highlight {
+    background-color: rgba(245, 247, 250, 0.6);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--success-color);
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.payment-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.payment-option {
+    background-color: var(--light-gray);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    width: 150px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-option:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-color: var(--success-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-option.selected {
+    background-color: rgba(46, 213, 115, 0.08);
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 2px rgba(46, 213, 115, 0.2);
+}
+
+.payment-option img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.75rem;
+}
+
+.payment-option span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.confirm-btn {
+    background-color: var(--success-color);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.confirm-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: width 0.3s ease;
+    z-index: 1;
+}
+
+.confirm-btn:hover::before {
+    width: 100%;
+}
+
+.confirm-btn:hover {
+    background-color: #25b864;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 213, 115, 0.3);
+}
+
+.security-badge {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.security-badge svg {
+    color: var(--success-color);
+    font-size: 1.2rem;
+}
+
+/* Responsividade para a tela de confirmação */
+@media (max-width: 768px) {
+    .offer-confirmation {
+        padding: 2rem 1.5rem;
+    }
+    
+    .offer-confirmation h2 {
+        font-size: 1.75rem;
+    }
+    
+    .payment-options {
+        gap: 0.75rem;
+    }
+    
+    .payment-option {
+        width: 120px;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .offer-confirmation {
+        padding: 1.75rem 1.25rem;
+    }
+    
+    .offer-confirmation h2 {
+        font-size: 1.5rem;
+    }
+    
+    .payment-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .payment-option {
+        width: 100%;
+        max-width: 200px;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    
+    .payment-option img {
+        margin-bottom: 0;
+        width: 40px;
+    }
+    
+    .confirm-btn {
+        max-width: 100%;
+    }
+}
